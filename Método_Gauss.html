@@ -1,0 +1,243 @@
+<html>
+
+<head>
+    <title>
+        .:Cálculo Numérico:.
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+
+</head>
+
+<body>
+
+    <script>
+        var A = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+        var b = [0, 0, 0, 0, 0];
+
+        var X = [];
+    </script>
+
+    <div id="gauss">
+        <h1>Método da Eliminação de Gauss</h1> <br /><br /><br />
+        <input type="number" id="aa" Value=0>.X1 +
+        <input type="number" id="ab" Value=0>.X2 +
+        <input type="number" id="ac" Value=0>.X3 +
+        <input type="number" id="ad" Value=0>.X4 +
+        <input type="number" id="ae" Value=0>.X5 =
+        <input type="number" id="y1" Value=0>
+        <br /><br />
+        <input type="number" id="ba" Value=0>.X1 +
+        <input type="number" id="bb" Value=0>.X2 +
+        <input type="number" id="bc" Value=0>.X3 +
+        <input type="number" id="bd" Value=0>.X4 +
+        <input type="number" id="be" Value=0>.X5 =
+        <input type="number" id="y2" Value=0>
+        <br /><br />
+        <input type="number" id="ca" Value=0>.X1 +
+        <input type="number" id="cb" Value=0>.X2 +
+        <input type="number" id="cc" Value=0>.X3 +
+        <input type="number" id="cd" Value=0>.X4 +
+        <input type="number" id="ce" Value=0>.X5 =
+        <input type="number" id="y3" Value=0>
+        <br /><br />
+        <input type="number" id="da" Value=0>.X1 +
+        <input type="number" id="db" Value=0>.X2 +
+        <input type="number" id="dc" Value=0>.X3 +
+        <input type="number" id="dd" Value=0>.X4 +
+        <input type="number" id="de" Value=0>.X5 =
+        <input type="number" id="y4" Value=0>
+        <br /><br />
+        <input type="number" id="ea" Value=0>.X1 +
+        <input type="number" id="eb" Value=0>.X2 +
+        <input type="number" id="ec" Value=0>.X3 +
+        <input type="number" id="ed" Value=0>.X4 +
+        <input type="number" id="ee" Value=0>.X5 =
+        <input type="number" id="y5" Value=0>
+        <br /><br />
+        <div> <button onclick="gaussSolver(A,b)">Solução</button> </div>
+
+        <br /><br />
+        A = 
+        <div id="Matriz A"></div>
+        
+        <br /><br />
+        b = 
+        <div id="Matriz b"></div>
+        
+        <br /><br />
+        <div id="resultado">
+            <p>Solução = </p>
+        </div>
+
+    </div>
+
+    <script>
+        function gaussSolver(A, b) {
+
+            A[0][0] = +document.getElementById("aa").value;
+            A[0][1] = +document.getElementById("ab").value;
+            A[0][2] = +document.getElementById("ac").value;
+            A[0][3] = +document.getElementById("ad").value;
+            A[0][4] = +document.getElementById("ae").value;
+            A[1][0] = +document.getElementById("ba").value;
+            A[1][1] = +document.getElementById("bb").value;
+            A[1][2] = +document.getElementById("bc").value;
+            A[1][3] = +document.getElementById("bd").value;
+            A[1][4] = +document.getElementById("be").value;
+            A[2][0] = +document.getElementById("ca").value;
+            A[2][1] = +document.getElementById("cb").value;
+            A[2][2] = +document.getElementById("cc").value;
+            A[2][3] = +document.getElementById("cd").value;
+            A[2][4] = +document.getElementById("ce").value;
+            A[3][0] = +document.getElementById("da").value;
+            A[3][1] = +document.getElementById("db").value;
+            A[3][2] = +document.getElementById("dc").value;
+            A[3][3] = +document.getElementById("dd").value;
+            A[3][4] = +document.getElementById("de").value;
+            A[4][0] = +document.getElementById("ea").value;
+            A[4][1] = +document.getElementById("eb").value;
+            A[4][2] = +document.getElementById("ec").value;
+            A[4][3] = +document.getElementById("ed").value;
+            A[4][4] = +document.getElementById("ee").value;
+
+            b[0] = +document.getElementById("y1").value;
+            b[1] = +document.getElementById("y2").value;
+            b[2] = +document.getElementById("y3").value;
+            b[3] = +document.getElementById("y4").value;
+            b[4] = +document.getElementById("y5").value;
+
+
+            //Ajeitar a Matriz
+            var i = 0;
+            var flag = 5;
+            var flag2 = 5;
+            var j = 0;
+            var a = 0;
+            while (i < flag) {
+                if ((A[i][0] === 0) & (A[i][1] === 0) & (A[i][2] === 0) & (A[i][3] === 0) & (A[i][4] === 0)) {
+                    A.splice([i], 1); //remove as linhas nulas de A
+                    b.splice([i], 1);//remove as linhas nulas de b
+                    flag--;
+                } else {
+                    i++;
+                }
+            }
+
+            i = 0; //reseta indice
+
+            while (i < flag2) {
+                console.log(A);
+                if ((A[a][i] === 0) & (A[a + 1][i] === 0)) {
+                    a++;
+                    console.log(a);
+                    console.log(i);
+                    if (a + 1 === flag) {
+                        j = 0;
+                        while (j < flag) {
+                            var remove = A[j].splice([i], 1); //remove as colunas nulas]
+                            j++;
+                        }
+                        console.log(flag2);
+                        flag2--;
+                        a = 0;
+                    }
+                } else {
+                    i++;
+                    a = 0;
+                }
+            }
+            
+            var indice1;
+            var indice2;
+            var R = "";
+            for(indice1 = 0; indice1 < A.length; indice1++){
+                for(indice2 = 0; indice2 < A.length; indice2++){
+                    R = R + String(A[indice1][indice2]) + "  ";
+                    document.getElementById("Matriz A").innerHTML = R;
+                }
+                R = R + "<br>"
+            }
+
+            
+            var T = "";
+            for(indice1 = 0; indice1 < b.length; indice1++){
+                for(indice2 = 0; indice2 < b.length; indice2++){
+                    T = T + String(b[indice1][indice2]) + "  ";
+                    document.getElementById("Matriz b").innerHTML = T;
+                }
+                T = T + "<br>"
+            }
+            
+            
+            var k, l, m;
+            //ETAPA DE ESCALONAMENTO
+            for (k = 0; k < A.length - 1; k++) {
+                //procura o maior k-ésimo coeficiente em módulo
+                var max = Math.abs(A[k][k]);
+                var maxIndex = k;
+                for (i = k + 1; i < A.length; i++) {
+                    if (max < Math.abs(A[i][k])) {
+                        max = Math.abs(A[i][k]);
+                        maxIndex = i;
+                    }
+                }
+                if (maxIndex != k) {
+                    /*
+                     troca a equação k pela equação com o
+                     maior k-ésimo coeficiente em módulo
+                     */
+                    for (j = 0; j < A.length; j++) {
+                        var temp = A[k][j];
+                        A[k][j] = A[maxIndex][j];
+                        A[maxIndex][j] = temp;
+                    }
+                    var temp = b[k];
+                    b[k] = b[maxIndex];
+                    b[maxIndex] = temp;
+                }
+                //Se A[k][k] é zero, então a matriz dos coeficiente é singular
+                //det A = 0
+                if (A[k][k] == 0) {
+                    return null;
+                } else {
+                    //realiza o escalonamento
+                    for (m = k + 1; m < A.length; m++) {
+                        var F = -A[m][k] / A[k][k];
+                        A[m][k] = 0; //evita uma iteração
+                        b[m] = b[m] + F * b[k];
+                        for (l = k + 1; l < A.length; l++) {
+                            A[m][l] = A[m][l] + F * A[k][l];
+                        }
+                    }
+                }
+            }
+            //ETAPA DE RESOLUÇÃO DO SISTEMA
+
+            var X = [0, 0, 0, 0, 0];
+            var soma = 0;
+            for (i = A.length - 1; i >= 0; i--) {
+
+                for (j = 0; j < A.length; j++) {
+                    soma = soma + X[j] * A[i][j];
+                }
+                if (A[i][i] === 0) {
+                    X[i] = 0;
+                } else {
+                    X[i] = (b[i] - soma) / (A[i][i]);
+
+                }
+                console.log(soma);
+                soma = 0;
+
+                document.getElementById("resultado").innerHTML =  "Resultado = " + X;
+                console.log("SOlução" + X);
+            }
+            return X;
+        }
+
+
+    </script>
+</body>
+
+</html>
