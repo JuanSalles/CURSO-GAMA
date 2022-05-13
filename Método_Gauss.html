@@ -66,9 +66,8 @@
         <div id="Matriz b"></div>
         
         <br /><br />
-        <div id="resultado">
-            <p>Solução = </p>
-        </div>
+        Resultado = 
+        <div id="resultado"></div>
 
     </div>
 
@@ -153,22 +152,19 @@
             var R = "";
             for(indice1 = 0; indice1 < A.length; indice1++){
                 for(indice2 = 0; indice2 < A.length; indice2++){
-                    R = R + String(A[indice1][indice2]) + "  ";
-                    document.getElementById("Matriz A").innerHTML = R;
+                    R = R + String(A[indice1][indice2]) + "   ";
+                    
                 }
                 R = R + "<br>"
             }
+            document.getElementById("Matriz A").innerHTML = R;
 
             
             var T = "";
             for(indice1 = 0; indice1 < b.length; indice1++){
-                for(indice2 = 0; indice2 < b.length; indice2++){
-                    T = T + String(b[indice1][indice2]) + "  ";
-                    document.getElementById("Matriz b").innerHTML = T;
-                }
-                T = T + "<br>"
+                T = T + String(b[indice1]) + "<br>"
             }
-            
+            document.getElementById("Matriz b").innerHTML = T;
             
             var k, l, m;
             //ETAPA DE ESCALONAMENTO
@@ -229,8 +225,12 @@
                 }
                 console.log(soma);
                 soma = 0;
-
-                document.getElementById("resultado").innerHTML =  "Resultado = " + X;
+                
+                var W = "";
+                for(indice1 = 0; indice1 < X.length; indice1++){
+                W = W + String(X[indice1]) + "<br>"
+                }
+                document.getElementById("resultado").innerHTML =  W;
                 console.log("SOlução" + X);
             }
             return X;
