@@ -17,60 +17,76 @@
 
         var X = [];
     </script>
+    
+    <h1>Resolucao de sistemas lineares: Juan Salles</h1> <br >
+    <h2> Calculo Numerico </h2>
+    
+    <div class="container">
+        <div class="box">
+            <input type="number" id="aa" Value=0>.X1 +
+            <input type="number" id="ab" Value=0>.X2 +
+            <input type="number" id="ac" Value=0>.X3 +
+            <input type="number" id="ad" Value=0>.X4 +
+            <input type="number" id="ae" Value=0>.X5 =
+            <input type="number" id="y1" Value=0>
+            <br /><br />
+            <input type="number" id="ba" Value=0>.X1 +
+            <input type="number" id="bb" Value=0>.X2 +
+            <input type="number" id="bc" Value=0>.X3 +
+            <input type="number" id="bd" Value=0>.X4 +
+            <input type="number" id="be" Value=0>.X5 =
+            <input type="number" id="y2" Value=0>
+            <br /><br />
+            <input type="number" id="ca" Value=0>.X1 +
+            <input type="number" id="cb" Value=0>.X2 +
+            <input type="number" id="cc" Value=0>.X3 +
+            <input type="number" id="cd" Value=0>.X4 +
+            <input type="number" id="ce" Value=0>.X5 =
+            <input type="number" id="y3" Value=0>
+            <br /><br />
+            <input type="number" id="da" Value=0>.X1 +
+            <input type="number" id="db" Value=0>.X2 +
+            <input type="number" id="dc" Value=0>.X3 +
+            <input type="number" id="dd" Value=0>.X4 +
+            <input type="number" id="de" Value=0>.X5 =
+            <input type="number" id="y4" Value=0>
+            <br /><br />
+            <input type="number" id="ea" Value=0>.X1 +
+            <input type="number" id="eb" Value=0>.X2 +
+            <input type="number" id="ec" Value=0>.X3 +
+            <input type="number" id="ed" Value=0>.X4 +
+            <input type="number" id="ee" Value=0>.X5 =
+            <input type="number" id="y5" Value=0>
+            <br /><br />
+            <div> <button onclick="gaussSolver(A,b)">Solução</button> </div>
+        </div> 
+    
+        <div id="saidas">  
+            
 
-    <div id="gauss">
-        <h1>Método da Eliminação de Gauss</h1> <br /><br /><br />
-        <input type="number" id="aa" Value=0>.X1 +
-        <input type="number" id="ab" Value=0>.X2 +
-        <input type="number" id="ac" Value=0>.X3 +
-        <input type="number" id="ad" Value=0>.X4 +
-        <input type="number" id="ae" Value=0>.X5 =
-        <input type="number" id="y1" Value=0>
-        <br /><br />
-        <input type="number" id="ba" Value=0>.X1 +
-        <input type="number" id="bb" Value=0>.X2 +
-        <input type="number" id="bc" Value=0>.X3 +
-        <input type="number" id="bd" Value=0>.X4 +
-        <input type="number" id="be" Value=0>.X5 =
-        <input type="number" id="y2" Value=0>
-        <br /><br />
-        <input type="number" id="ca" Value=0>.X1 +
-        <input type="number" id="cb" Value=0>.X2 +
-        <input type="number" id="cc" Value=0>.X3 +
-        <input type="number" id="cd" Value=0>.X4 +
-        <input type="number" id="ce" Value=0>.X5 =
-        <input type="number" id="y3" Value=0>
-        <br /><br />
-        <input type="number" id="da" Value=0>.X1 +
-        <input type="number" id="db" Value=0>.X2 +
-        <input type="number" id="dc" Value=0>.X3 +
-        <input type="number" id="dd" Value=0>.X4 +
-        <input type="number" id="de" Value=0>.X5 =
-        <input type="number" id="y4" Value=0>
-        <br /><br />
-        <input type="number" id="ea" Value=0>.X1 +
-        <input type="number" id="eb" Value=0>.X2 +
-        <input type="number" id="ec" Value=0>.X3 +
-        <input type="number" id="ed" Value=0>.X4 +
-        <input type="number" id="ee" Value=0>.X5 =
-        <input type="number" id="y5" Value=0>
-        <br /><br />
-        <div> <button onclick="gaussSolver(A,b)">Solução</button> </div>
+            <br /><br />
+            A = 
+            <div id="Matriz A" class="out"></div>
+            
+            <br /><br />
+            b = 
+            <div id="Matriz b" class="out"></div>
+            
+            <br /><br />
+            x (Eliminacao de Gauss) = 
+            <div id="resultado" class="out"></div>
 
-        <br /><br />
-        A = 
-        <div id="Matriz A"></div>
-        
-        <br /><br />
-        b = 
-        <div id="Matriz b"></div>
-        
-        <br /><br />
-        Resultado = 
-        <div id="resultado"></div>
+            <br /><br />
+            U = 
+            <div id="Matriz U" class="out"></div>
 
+            <br /><br />
+            L = 
+            <div id="Matriz L" class="out"></div>
+
+
+        </div>
     </div>
-
     <script>
         function gaussSolver(A, b) {
 
@@ -167,6 +183,10 @@
             document.getElementById("Matriz b").innerHTML = T;
             
             var k, l, m;
+            var U = new Array(A.length);
+            for (i = 0; i < A.length; i++){
+                U[i] = new Array(A.length).fill(0);
+            }
             //ETAPA DE ESCALONAMENTO
             for (k = 0; k < A.length - 1; k++) {
                 //procura o maior k-ésimo coeficiente em módulo
@@ -200,6 +220,7 @@
                     //realiza o escalonamento
                     for (m = k + 1; m < A.length; m++) {
                         var F = -A[m][k] / A[k][k];
+                        U[m][k] = -F;
                         A[m][k] = 0; //evita uma iteração
                         b[m] = b[m] + F * b[k];
                         for (l = k + 1; l < A.length; l++) {
@@ -209,6 +230,16 @@
                 }
             }
             //ETAPA DE RESOLUÇÃO DO SISTEMA
+
+            var V = "";
+
+            for(indice1 = 0; indice1 < A.length; indice1++){
+                for(indice2 = 0; indice2 < A.length; indice2++){
+                    V = V + String(A[indice1][indice2]) + "   ";
+                }
+                V = V + "<br>";
+            }
+            document.getElementById("Matriz L").innerHTML = V;
 
             var X = [0, 0, 0, 0, 0];
             var soma = 0;
@@ -232,6 +263,16 @@
                 }
                 document.getElementById("resultado").innerHTML =  W;
                 console.log("SOlução" + X);
+
+                var V = "";
+
+                for(indice1 = 0; indice1 < U.length; indice1++){
+                    for(indice2 = 0; indice2 < U.length; indice2++){
+                        V = V + String(U[indice1][indice2]) + "   ";
+                    }
+                    V = V + "<br>"
+                }
+                document.getElementById("Matriz U").innerHTML = V;
             }
             return X;
         }
